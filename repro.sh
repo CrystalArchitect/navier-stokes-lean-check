@@ -39,15 +39,27 @@ if [ "$MODE" = all ] || [ "$MODE" = diff ]; then
   # The definitions the proof imports must match the challenge reference exactly,
   # or the adapter could be satisfying a lookalike structure.
   python3 - <<'PY'
-import pathlib
+import pathlib, sys
+
 def body(p):
+    """The definitions block: everything between the namespace opener and
+    whichever comes first, the (C) challenge theorem or the namespace close.
+    The proof-side copy has no challenge theorems, so it ends at `end`."""
     s = pathlib.Path(p).read_text(encoding="utf-8")
     i = s.index("namespace NavierStokes.Comparator")
-    j = s.index("/-- (C) Breakdown")
-    return s[i:j].rstrip()
+    ends = [s.index(m) for m in ("/-- (C) Breakdown", "end NavierStokes.Comparator")
+            if m in s]
+    return s[i:min(ends)].rstrip()
+
 a = body("NavierStokesAndEuler/NavierStokes/ComparatorDefinitions.lean")
 b = body("NavierStokesAndEuler/ComparatorChallenges/NavierStokes.lean")
-print("proof-side definitions == challenge reference:", a == b)
+ok = a == b
+print("proof-side definitions == challenge reference:", ok)
+if not ok:
+    import difflib
+    sys.stdout.writelines(difflib.unified_diff(
+        a.splitlines(True), b.splitlines(True), "proof-side", "challenge"))
+    sys.exit(1)
 PY
 
   echo "--- sorry outside the challenge reference files (expect none) ---"
