@@ -1,0 +1,19 @@
+navier-stokes-lean-check
+Copyright 2026 swarm-ai-research
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This product includes material derived from third-party works:
+
+  Formal Conjectures
+  Copyright 2026 The Formal Conjectures Authors
+  https://github.com/google-deepmind/formal-conjectures
+  Licensed under the Apache License, Version 2.0
+
+  NavierStokesAndEuler
+  Copyright 2026 OpenAI
+  https://github.com/openai/NavierStokesAndEuler
+  Licensed under the Apache License, Version 2.0
+
+evidence/definitions.diff is a diff between those two works and contains
+excerpts of both.

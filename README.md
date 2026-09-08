@@ -167,6 +167,6 @@ Or by hand — see [`repro.sh`](repro.sh) for the full sequence.
 
 ## License
 
-The write-up and evidence files here are MIT. The upstream Lean sources they quote are
-Apache-2.0 (Formal Conjectures Authors / OpenAI); `evidence/definitions.diff` contains
-excerpts of both and is redistributed under Apache-2.0.
+Apache-2.0, matching the upstream Lean sources this quotes. `evidence/definitions.diff`
+contains excerpts of both `google-deepmind/formal-conjectures` and
+`openai/NavierStokesAndEuler`; see [NOTICE](NOTICE) for attributions.
