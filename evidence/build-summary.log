@@ -1,0 +1,16 @@
+# lake build — filtered to all non-progress output
+# Full log was 2495 lines; the other 2487 are '✔ Built <module> (Ns)' progress.
+
+⚠ [9161/11251] Built ComparatorChallenges.Euler (64s)
+warning: ComparatorChallenges/Euler.lean:85:8: declaration uses `sorry`
+warning: ComparatorChallenges/Euler.lean:170:8: declaration uses `sorry`
+⚠ [9164/11251] Built ComparatorChallenges.NavierStokes (66s)
+warning: ComparatorChallenges/NavierStokes.lean:273:8: declaration uses `sorry`
+warning: ComparatorChallenges/NavierStokes.lean:280:8: declaration uses `sorry`
+ℹ [10586/11251] Built NavierStokes.ComparatorSolution (55s)
+info: NavierStokes/ComparatorSolution.lean:31:0: 'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: NavierStokes/ComparatorSolution.lean:32:0: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [11250/11251] Built Euler.Solution (28s)
+info: Euler/Solution.lean:73:0: 'Euler.euler_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Euler/Solution.lean:75:0: 'Euler.exists_compact_smooth_euler_singularity' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (11251 jobs).
