@@ -77,17 +77,27 @@ if [ "$MODE" = all ] || [ "$MODE" = build ]; then
   }
 
   cd NavierStokesAndEuler
-  elan toolchain install "$(cat lean-toolchain)"
+  # `elan toolchain install` errors out if the toolchain is already present,
+  # so ask first rather than swallowing a scary-looking non-error.
+  TOOLCHAIN=$(cat lean-toolchain)
+  if elan toolchain list | grep -qF "$TOOLCHAIN"; then
+    echo "toolchain $TOOLCHAIN already installed"
+  else
+    elan toolchain install "$TOOLCHAIN"
+  fi
   lake exe cache get                       # ~8,747 Mathlib artifacts
   lake build 2>&1 | tee ../build.log
 
   echo "--- non-progress output ---"
-  grep -v '^✔' ../build.log
+  grep -v '^✔' ../build.log || true
 
   # ComparatorSolution.lean already ends with #print axioms on both theorems.
   # Expect exactly [propext, Classical.choice, Quot.sound] and no sorryAx.
   echo "--- sorryAx (expect none) ---"
   grep -i sorryAx ../build.log || echo "none"
+
+  echo "--- sorry outside ComparatorChallenges (expect none) ---"
+  grep -i "uses .sorry" ../build.log | grep -v ComparatorChallenges || echo "none"
 fi
 
 # ------------------------------------------------------------- not runnable
